@@ -80,4 +80,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+config.action_mailer.default_url_options = { :host => 'garnish-app.heroku.com'}
+  # Adding config based on devise set up
+  # Note to set this to actual host
+
 end
