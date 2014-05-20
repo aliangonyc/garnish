@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :foods
+
   devise_for :users
   root "pages#home"
   get "forage" => "pages#forage"
