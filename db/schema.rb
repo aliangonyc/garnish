@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520022824) do
+ActiveRecord::Schema.define(version: 20140522031022) do
 
   create_table "foods", force: true do |t|
-    t.string   "type"
+    t.string   "item"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
