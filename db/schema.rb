@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140522031022) do
+ActiveRecord::Schema.define(version: 20140613194911) do
 
   create_table "foods", force: true do |t|
     t.string   "item"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "foods", ["user_id"], name: "index_foods_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
