@@ -1,5 +1,7 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
 
   def index
@@ -11,7 +13,7 @@ class FoodsController < ApplicationController
   end
 
   def new
-    @food = Food.new
+    @food = current_user.foods.build
   end
 
   def edit
@@ -19,7 +21,7 @@ class FoodsController < ApplicationController
 
 
   def create
-    @food = Food.new(food_params)
+    @food = current_user.foods.build(food_params)
       if @food.save
         redirect_to @food, notice: 'Food was successfully created.'
       else
@@ -46,6 +48,12 @@ class FoodsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_food
       @food = Food.find(params[:id])
+    end
+
+    def correct_user
+      @food = current_user.foods.find_by(id: params[:id])
+      redirect_to foods_path, notice: "Not authorized to edit this food" if @food.nil?
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
